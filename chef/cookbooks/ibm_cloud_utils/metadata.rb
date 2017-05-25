@@ -1,6 +1,14 @@
-Ibm_cloud_utils Cookbook
-========================
-
+name             'ibm_cloud_utils'
+maintainer       'IBM Corp'
+maintainer_email ''
+license          'Copyright IBM Corp. 2016, 2017'
+description      'LWRPs repository'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+provides         'ibm_cloud_utils'
+gem              "chef-vault", '2.9.0'
+supports         'linux'
+supports         'windows'
+description <<-EOH
 
 
 ## DESCRIPTION
@@ -854,8 +862,8 @@ Resource for creating a zip archive on Windows
 
 ```
 ibm_cloud_utils_zip "Create_zip_file" do
-  source "C:\product\log\install.log"
-  target_tar "C:\Temp\archive.zip"
+  source "C:\\product\\log\\install.log"
+  target_tar "C:\\Temp\\archive.zip"
 end
 ```
 
@@ -1123,114 +1131,111 @@ ibm_cloud_utils_ibm_cloud_fs "db2data" do
 end
 ```
 
+EOH
 
-
-Requirements
-------------
-
-### Platform:
-
-* Linux
-* Windows
-
-### Cookbooks:
-
-*No dependencies defined*
-
-Attributes
-----------
-
-<table>
-  <tr>
-    <td>Attribute</td>
-    <td>Description</td>
-    <td>Default</td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['im_repo']</code></td>
-    <td>IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) </td>
-    <td><code></code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['im_repo_password']</code></td>
-    <td>IBM Software  Installation Manager Repository Password</td>
-    <td><code></code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['im_repo_self_signed_cert']</code></td>
-    <td>IBM Software  Installation Manager Repository Self Signed Certificate (True/False)</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['im_repo_user']</code></td>
-    <td>IBM Software  Installation Manager Repository username</td>
-    <td><code>repouser</code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['sw_repo']</code></td>
-    <td>IBM Software Repo Root (https://<hostname>:<port>)</td>
-    <td><code></code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['sw_repo_auth']</code></td>
-    <td>IBM Software  Software Manager  Authentication Enabled</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['sw_repo_password']</code></td>
-    <td>IBM Software Repo Password</td>
-    <td><code></code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['sw_repo_self_signed_cert']</code></td>
-    <td>IBM Software  Software Manager Repository Self Signed Certificate (True/False)</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>node['ibm']['sw_repo_user']</code></td>
-    <td>IBM Software Repo Username</td>
-    <td><code>repouser</code></td>
-  </tr>
-</table>
-
-Recipes
--------
-
-### ibm_cloud_utils::default.rb
-
-
+version '0.1.21'
+attribute 'ibm/im_repo',
+          :default => '',
+          :description => 'IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ',
+          :displayname => 'IBM Software Installation Manager Repository',
+          :parm_type => 'pattern',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/im_repo_password',
+          :default => '',
+          :description => 'IBM Software  Installation Manager Repository Password',
+          :displayname => 'IBM Software Installation Manager Repository Password',
+          :parm_type => 'none',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'true',
+          :type => 'string'
+attribute 'ibm/im_repo_self_signed_cert',
+          :default => 'false',
+          :description => 'IBM Software  Installation Manager Repository Self Signed Certificate (True/False)',
+          :displayname => 'IBM Software Installation Manager Repository Self Signed Certificate (True/False)',
+          :parm_type => 'none',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/im_repo_user',
+          :default => 'repouser',
+          :description => 'IBM Software  Installation Manager Repository username',
+          :displayname => 'IBM Software Installation Manager Repository Username',
+          :parm_type => 'pattern',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/sw_repo',
+          :default => '',
+          :description => 'IBM Software Repo Root (https://<hostname>:<port>)',
+          :displayname => 'IBM Software Repo Root',
+          :parm_type => 'pattern',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/sw_repo_auth',
+          :default => 'true',
+          :description => 'IBM Software  Software Manager  Authentication Enabled',
+          :displayname => 'IBM Software Software Repository Authentication Enabled',
+          :parm_type => 'none',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/sw_repo_password',
+          :default => '',
+          :description => 'IBM Software Repo Password',
+          :displayname => 'IBM Software Repo Password',
+          :parm_type => 'none',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'true',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/sw_repo_self_signed_cert',
+          :default => 'false',
+          :description => 'IBM Software  Software Manager Repository Self Signed Certificate (True/False)',
+          :displayname => 'IBM Software Software Repository Self Signed Certificate (True/False)',
+          :parm_type => 'none',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+attribute 'ibm/sw_repo_user',
+          :default => 'repouser',
+          :description => 'IBM Software Repo Username',
+          :displayname => 'IBM Software Repo Username',
+          :parm_type => 'pattern',
+          :precedence_level => 'node',
+          :required => 'recommended',
+          :secret => 'false',
+          :selectable => 'false',
+          :type => 'string'
+recipe 'ibm_cloud_utils::default.rb', '
 Default recipe (default.rb)
 Perform minimal product installation
-
-
-### ibm_cloud_utils::gather_evidence.rb
-
-
+'
+recipe 'ibm_cloud_utils::gather_evidence.rb', '
 Default recipe (gather_evidence.rb)
 Perform product verification steps
-
-
-### ibm_cloud_utils::install.rb
-
-
+'
+recipe 'ibm_cloud_utils::install.rb', '
 Default recipe (install.rb)
 Perform product installation steps
-
-
-### ibm_cloud_utils::prereq.rb
-
-
+'
+recipe 'ibm_cloud_utils::prereq.rb', '
 Default recipe (prereq.rb)
 Perform  product prerequisite steps
-
-
-
-License and Author
-------------------
-
-Author:: IBM Corp (<>)
-
-Copyright:: 2017, IBM Corp
-
-License:: Copyright IBM Corp. 2016, 2017
-
+'

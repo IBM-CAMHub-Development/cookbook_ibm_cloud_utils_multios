@@ -1,0 +1,102 @@
+{
+    "ibm": {
+        "im_repo": {
+            "default": "",
+            "description": "IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ",
+            "displayname": "IBM Software Installation Manager Repository",
+            "parm_type": "pattern",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "im_repo_password": {
+            "default": "",
+            "description": "IBM Software  Installation Manager Repository Password",
+            "displayname": "IBM Software Installation Manager Repository Password",
+            "parm_type": "none",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "true",
+            "type": "string"
+        },
+        "im_repo_self_signed_cert": {
+            "default": "false",
+            "description": "IBM Software  Installation Manager Repository Self Signed Certificate (True/False)",
+            "displayname": "IBM Software Installation Manager Repository Self Signed Certificate (True/False)",
+            "parm_type": "none",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "im_repo_user": {
+            "default": "repouser",
+            "description": "IBM Software  Installation Manager Repository username",
+            "displayname": "IBM Software Installation Manager Repository Username",
+            "parm_type": "pattern",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "sw_repo": {
+            "default": "",
+            "description": "IBM Software Repo Root (https://<hostname>:<port>)",
+            "displayname": "IBM Software Repo Root",
+            "parm_type": "pattern",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "sw_repo_auth": {
+            "default": "true",
+            "description": "IBM Software  Software Manager  Authentication Enabled",
+            "displayname": "IBM Software Software Repository Authentication Enabled",
+            "parm_type": "none",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "sw_repo_password": {
+            "default": "",
+            "description": "IBM Software Repo Password",
+            "displayname": "IBM Software Repo Password",
+            "parm_type": "none",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "true",
+            "selectable": "false",
+            "type": "string"
+        },
+        "sw_repo_self_signed_cert": {
+            "default": "false",
+            "description": "IBM Software  Software Manager Repository Self Signed Certificate (True/False)",
+            "displayname": "IBM Software Software Repository Self Signed Certificate (True/False)",
+            "parm_type": "none",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        },
+        "sw_repo_user": {
+            "default": "repouser",
+            "description": "IBM Software Repo Username",
+            "displayname": "IBM Software Repo Username",
+            "parm_type": "pattern",
+            "precedence_level": "node",
+            "required": "recommended",
+            "secret": "false",
+            "selectable": "false",
+            "type": "string"
+        }
+    }
+}
