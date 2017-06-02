@@ -31,7 +31,7 @@ def mount_device(device, mountpoint, fstype, options)
 end
 
 def unmount_device(device, mountpoint)
-  if node['platform_family'] == 'rhel' && node['platform_version'].to_f >= 7.0
+  if (node['platform_family'] == 'rhel' && node['platform_version'].to_f >= 7.0) || (node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 16.0)
     package 'psmisc'
   end
   execute "unmounting #{device}" do

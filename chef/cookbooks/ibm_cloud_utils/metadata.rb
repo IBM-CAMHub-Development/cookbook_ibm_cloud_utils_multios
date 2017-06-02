@@ -36,6 +36,7 @@ Cookbook that keeps the common utilities.
 * [ibm_cloud_utils_unpack](#ibm_cloud_utils_unpack) - Get a packed file (zip, tar, tar.gz, tar.bz2, tgz, Z) over HTTP, FTP or local file system and unpacks it into the **target_dir**.
 * [ibm_cloud_utils_zip](#ibm_cloud_utils_zip) - Create zip archive on Windows
 * [ibm_cloud_utils_ibm_cloud_sysctl](#ibm_cloud_utils_ibm_cloud_sysctl) - Apply or remove sysctl parameter on linux
+* [ibm_cloud_utils_hostsfile_update](#ibm_cloud_utils_hostsfile_update) - Update the etc/hosts file of the vm.
 
 
 ## ibm_cloud_utils_cpuno
@@ -135,6 +136,21 @@ ibm_cloud_utils_freespace 'check-tmp-freespace' do
 end
 ```
 
+## ibm_cloud_utils_hostsfile_update
+
+Update the /etc/hosts file with hosts file information.
+
+### Actions
+
+- updateshosts: Update the /etc/hosts file with hosts file information..
+
+### Usage
+
+```
+ibm_cloud_utils_hostsfile_update 'update_the_etc_hosts_file' do
+  action :updateshosts
+end
+```
 
 ## ibm_cloud_utils_supported_os_check
 
@@ -1133,7 +1149,8 @@ end
 
 EOH
 
-version '0.1.21'
+version '0.1.25'
+
 attribute 'ibm/im_repo',
           :default => '',
           :description => 'IBM Software  Installation Manager Repository URL (https://<hostname/IP>:<port>/IMRepo) ',

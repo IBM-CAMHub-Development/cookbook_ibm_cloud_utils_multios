@@ -5,6 +5,8 @@
 #
 # Cookbook Name:: ibm_cloud_utils
 ###############################################################################
+include Chef::Mixin::ShellOut
+# Helper module
 module IBM
   require 'rbconfig'
   # Include various helper functions
@@ -83,13 +85,24 @@ module IBM
 
     # Verify whether the pattern is supported on operating system of the vm
     def self.verify_supported_os(node, supported_os_list, error_message)
-      operating_system = node['platform_family']
+      operating_system = node['platform']
       supported_os_list.each_pair do |os, support|
         next if os.to_s != operating_system.to_s
         next unless support == "false"
         Chef::Log.warn(error_message)
         Chef::Log.info("OS not supported by pattern: #{os}")
         raise error_message
+      end
+    end
+
+    def self.awscloud?
+      get_version = 'cat /sys/devices/virtual/dmi/id/bios_version'
+
+      begin
+        !/amazon$/.match(shell_out(get_version).stdout).to_s.empty?
+      rescue Errno::ENOENT => e
+        Chef::Log.info "File not found: #{get_version}, error: #{e}"
+        return false
       end
     end
   end

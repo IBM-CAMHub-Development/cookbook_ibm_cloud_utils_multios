@@ -94,4 +94,8 @@ if defined?(ChefSpec)
   def ibm_cloud_utils_supported_os_check(source)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_supported_os_check, :check, source)
   end
+
+  def ibm_cloud_utils_hostsfile_update(source)
+    ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_hostsfile_update, :updateshosts, source)
+  end
 end
