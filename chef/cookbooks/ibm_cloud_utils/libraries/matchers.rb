@@ -98,4 +98,8 @@ if defined?(ChefSpec)
   def ibm_cloud_utils_hostsfile_update(source)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_hostsfile_update, :updateshosts, source)
   end
+
+  def ibm_cloud_utils_enable_awsyumrepo(source)
+    ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_enable_awsyumrepo, :enable, source)
+  end
 end

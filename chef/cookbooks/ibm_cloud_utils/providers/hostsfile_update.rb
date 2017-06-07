@@ -27,15 +27,7 @@ action :updateshosts do
       hostsfile.insert_line_if_no_match(/#{n['ipaddress']}/, line)
       hostsfile.write_file
       Chef::Log.info("Updated the hosts file")
-      def_aws_yumsetup
     end
   end
   new_resource.updated_by_last_action(true)
-end
-
-def def_aws_yumsetup
-  execute 'enable-extra-repository' do
-    command 'yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional'
-    only_if { IBM::IBMHelper.awscloud? }
-  end
 end
