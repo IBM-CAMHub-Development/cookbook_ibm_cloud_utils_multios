@@ -5,7 +5,6 @@ license          'Copyright IBM Corp. 2016, 2017'
 description      'LWRPs repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 provides         'ibm_cloud_utils'
-gem              "chef-vault", '2.9.0'
 supports         'linux'
 supports         'windows'
 description <<-EOH
@@ -1149,7 +1148,7 @@ end
 
 EOH
 
-version '0.1.27'
+version '0.1.28'
 
 attribute 'ibm/im_repo',
           :default => '',
