@@ -22,7 +22,7 @@ def format_device(device, label, fstype)
 end
 
 def mount_device(device, mountpoint, fstype, options)
-  execute "mounting #{device} in" do
+  execute "mounting #{device} in #{mountpoint}" do
     command "mount -o #{options} #{device} #{mountpoint}"
     only_if { ::File.directory?(mountpoint) }
     not_if { shell_out('mount').stdout.include?mountpoint }
@@ -69,7 +69,7 @@ action :enable do
   if node['os'] == 'linux'
     run_action(:create)
     mount new_resource.mountpoint do  
-      action :enable
+      action [:mount, :enable]
       device new_resource.device
       fstype new_resource.fstype
       options new_resource.options
