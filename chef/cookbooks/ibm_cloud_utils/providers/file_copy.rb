@@ -25,7 +25,7 @@ action :pull do
               new_resource.destination
             end
 
-    Chef::Log.debug "===============#{@dest}==============="
+    Chef::Log.debug "=============== Destination: [#{@dest}] ==============="
 
     output = session.exec!("md5sum #{new_resource.source}")
     raise "Source file [#{new_resource.source}] missing !" if output =~ /No such file/
@@ -48,7 +48,14 @@ action :pull do
   if local_sum == @remote_sum
     new_resource.updated_by_last_action(false)
   else
-    Net::SCP.start(new_resource.remote_host, new_resource.login, :password => new_resource.password) do |session|
+    if !new_resource.priv_ssh_key.nil?
+      opts = { keys: [ new_resource.priv_ssh_key ], keys_only: true }
+    elsif  !new_resource.password.nil?
+      opts = { password: new_resource.password }
+    else
+      raise "No private key and no password was provided to connect to the remote host !"
+    end
+    Net::SCP.start(new_resource.remote_host, new_resource.login, opts) do |session|
       Chef::Log.info "Pulling the remote file #{new_resource.source} from #{new_resource.remote_host}..."
       session.download!(new_resource.source, @dest) do |_ch, _name, received, total|
         Chef::Log.info "#{received}/#{total}..." if @remote_fsize > 1_000_000
@@ -73,7 +80,7 @@ action :push do
               new_resource.destination
             end
 
-    Chef::Log.debug "===============#{@dest}==============="
+    Chef::Log.debug "=============== Destination: [#{@dest}] ==============="
 
     output = session.exec!("md5sum #{@dest}")
     raise "Target file not readable" if output =~ /Permission denied/
@@ -92,7 +99,14 @@ action :push do
   if local_sum == @remote_sum
     new_resource.updated_by_last_action(false)
   else
-    Net::SCP.start(new_resource.remote_host, new_resource.login, :password => new_resource.password) do |session|
+    if !new_resource.priv_ssh_key.nil?
+      opts = { keys: [ new_resource.priv_ssh_key ], keys_only: true }
+    elsif  !new_resource.password.nil?
+      opts = { password: new_resource.password }
+    else
+      raise "No private key and no password was provided to connect to the remote host !"
+    end
+    Net::SCP.start(new_resource.remote_host, new_resource.login, opts) do |session|
       Chef::Log.info "Pushing the local file #{new_resource.source} to #{new_resource.remote_host}"
       session.upload!(new_resource.source, @dest) do |_ch, name, sent, total|
         Chef::Log.info "#{sent}/#{total}..." if ::File.stat(name).size > 1_000_000

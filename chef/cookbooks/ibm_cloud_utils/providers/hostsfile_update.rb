@@ -25,6 +25,7 @@ action :updateshosts do
       Chef::Log.info("Adding #{line} to hosts file if not present")
       hostsfile = Chef::Util::FileEdit.new(node['ibm']['hostsfile_location'])
       hostsfile.insert_line_if_no_match(/#{n['ipaddress']}/, line)
+      hostsfile.search_file_delete_line(/127.0.1.1/) if node['platform_family'] == "debian"
       hostsfile.write_file
       Chef::Log.info("Updated the hosts file")
     end

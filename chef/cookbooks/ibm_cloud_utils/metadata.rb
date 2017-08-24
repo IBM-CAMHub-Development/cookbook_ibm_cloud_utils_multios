@@ -33,6 +33,7 @@ Cookbook that keeps the common utilities.
 * [ibm_cloud_utils_sw_repo](#ibm_cloud_utils_sw_repo) - Check if a package exists in software repository
 * [ibm_cloud_utils_tar](#ibm_cloud_utils_tar) - Create tar archive
 * [ibm_cloud_utils_unpack](#ibm_cloud_utils_unpack) - Get a packed file (zip, tar, tar.gz, tar.bz2, tgz, Z) over HTTP, FTP or local file system and unpacks it into the **target_dir**.
+* [ibm_cloud_utils_webdav](#ibm_cloud_utils_webdav) - Used to upload/download files to/from WeDAV server
 * [ibm_cloud_utils_zip](#ibm_cloud_utils_zip) - Create zip archive on Windows
 * [ibm_cloud_utils_ibm_cloud_sysctl](#ibm_cloud_utils_ibm_cloud_sysctl) - Apply or remove sysctl parameter on linux
 * [ibm_cloud_utils_hostsfile_update](#ibm_cloud_utils_hostsfile_update) - Update the etc/hosts file of the vm.
@@ -844,6 +845,127 @@ Get a packed file (zip, tar, tar.gz, tar.bz2, tgz, Z) over HTTP, FTP or local fi
   end
 ```
 
+## ibm_cloud_utils_webdav
+
+Used to upload/download files to/from WebDAV server and to create or delete collections
+
+### Actions
+
+- upload: Default. Used to upload a file to WebDAV server
+- download: Used to download a file from WebDAV server
+- delete: Used to delete a file from WebDAV server
+- create_collection: Used to create a collection on the WebDAV server
+- delete_collection: Used to delete a collection from the WebDAV server
+
+### Attribute Parameters
+
+<table>
+  <tr>
+    <td>LWRP Attribute</td>
+    <td>Description</td>
+    <td>Default</td>
+  </tr>
+  <tr>
+    <td><code>webdav_server</code></td>
+    <td>URL for WebDAV server</td>
+    <td><code>node['ibm']['sw_repo'] + '/sharedStorage'</code></td>
+  </tr>
+  <tr>
+    <td><code>sw_repo_self_signed_cert</code></td>
+    <td>If the WebDAV server is secured but it uses a self signed SSL certificate this should be set to "true"</td>
+    <td><code>node['ibm']['sw_repo_self_signed_cert']</code></td>
+  </tr>
+  <tr>
+    <td><code>sw_repo_user</code></td>
+    <td>User used to access WebDAV server if this server is secured and authentication is required. This is not required if WebDAV server is not secured.</td>
+    <td><code>node['ibm']['sw_repo_user']</code></td>
+  </tr>
+  <tr>
+    <td><code>secure_repo</code></td>
+    <td>If the WebDAV server is public this should be set to "false"</td>
+    <td><code>'true'</code></td>
+  </tr>
+  <tr>
+    <td><code>file</code></td>
+    <td>The name of the file that will be uploaded/deleted to/from WebDAV server</td>
+    <td><code>''</code></td>
+  </tr>
+  <tr>
+    <td><code>download_path</code></td>
+    <td>This is the local path where the file will be downloaded from WebDAV server</td>
+    <td><code>nil</code></td>
+  </tr>
+  <tr>
+    <td><code>source_path</code></td>
+    <td>This is the local path of the file that will be uploaded to WebDAV server</td>
+    <td><code>nil</code></td>
+  </tr>
+  <tr>
+    <td><code>collection</code></td>
+    <td>Collection that will be used to store the files on the WebDAV server</td>
+    <td><code>nil</code></td>
+  </tr>
+</table>
+
+### Usage
+```
+ibm_cloud_utils_webdav "create_collection_and_upload_file" do
+  file 'upload.txt'
+  source_path '/tmp'
+  collection 'stack1234'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  action [:create_collection, :upload]
+end
+```
+```
+ibm_cloud_utils_webdav "new_collection" do
+  collection 'stack1234'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  action :create_collection
+end
+```
+```
+ibm_cloud_utils_webdav "upload_file" do
+  file 'upload.txt'
+  collection 'stack1234'
+  source_path '/tmp'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  webdav_server 'https://<hostname>:<port>/sharedStorage/'
+  action :upload
+end
+```
+```
+ibm_cloud_utils_webdav "download_file" do
+  file 'upload.txt'
+  collection 'stack1234'
+  download_path '/tmp'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  action :download
+end
+```
+```
+ibm_cloud_utils_webdav "delete_file" do
+  file 'upload.txt'
+  collection 'stack1234'
+  source_path '/tmp'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  action :delete
+end
+```
+```
+ibm_cloud_utils_webdav "delete_collection" do
+  collection 'stack1234'
+  sw_repo_self_signed_cert 'true'
+  secure_repo 'true'
+  action :delete_collection
+end
+```
+
 ## ibm_cloud_utils_zip
 
 Resource for creating a zip archive on Windows
@@ -1148,7 +1270,7 @@ end
 
 EOH
 
-version '0.1.29'
+version '0.1.36'
 
 attribute 'ibm/im_repo',
           :default => '',
