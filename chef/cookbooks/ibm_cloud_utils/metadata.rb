@@ -1270,7 +1270,7 @@ end
 
 EOH
 
-version '0.1.36'
+version '0.1.37'
 
 attribute 'ibm/im_repo',
           :default => '',
@@ -1280,7 +1280,7 @@ attribute 'ibm/im_repo',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/im_repo_password',
           :default => '',
@@ -1299,7 +1299,7 @@ attribute 'ibm/im_repo_self_signed_cert',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/im_repo_user',
           :default => 'repouser',
@@ -1309,7 +1309,7 @@ attribute 'ibm/im_repo_user',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/sw_repo',
           :default => '',
@@ -1319,7 +1319,7 @@ attribute 'ibm/sw_repo',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/sw_repo_auth',
           :default => 'true',
@@ -1329,7 +1329,7 @@ attribute 'ibm/sw_repo_auth',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/sw_repo_password',
           :default => '',
@@ -1339,7 +1339,7 @@ attribute 'ibm/sw_repo_password',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'true',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/sw_repo_self_signed_cert',
           :default => 'false',
@@ -1349,7 +1349,7 @@ attribute 'ibm/sw_repo_self_signed_cert',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 attribute 'ibm/sw_repo_user',
           :default => 'repouser',
@@ -1359,7 +1359,7 @@ attribute 'ibm/sw_repo_user',
           :precedence_level => 'node',
           :required => 'recommended',
           :secret => 'false',
-          :selectable => 'false',
+          :selectable => 'true',
           :type => 'string'
 recipe 'ibm_cloud_utils::default.rb', '
 Default recipe (default.rb)
