@@ -1270,7 +1270,7 @@ end
 
 EOH
 
-version '0.1.38'
+version '0.1.40'
 
 attribute 'ibm/im_repo',
           :default => '',

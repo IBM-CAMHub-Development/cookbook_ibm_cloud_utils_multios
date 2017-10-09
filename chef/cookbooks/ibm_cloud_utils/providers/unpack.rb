@@ -65,10 +65,10 @@ action :unpack do
     cacert.close
     cert_name = cert.subject.to_a.find { |name, _, _| name == 'CN' }[1]
     etc_hosts = open(hosts, 'a+')
-    if etc_hosts.include? "#{uri.host} #{cert_name}"
+    if etc_hosts.include? "#{uri.host} #{cert_name}\n"
       Chef::Log.info "line #{uri.host} #{cert_name} found in #{hosts}"
     else
-      etc_hosts.write("#{uri.host} #{cert_name}")
+      etc_hosts.write("#{uri.host} #{cert_name}\n")
     end
     etc_hosts.close
     repo_source = new_resource.source.gsub(uri.host.to_s, cert_name.to_s)
@@ -217,10 +217,10 @@ action :download do
     cacert.close
     cert_name = cert.subject.to_a.find { |name, _, _| name == 'CN' }[1]
     etc_hosts = open(hosts, 'a+')
-    if etc_hosts.include? "#{uri.host} #{cert_name}"
+    if etc_hosts.include? "#{uri.host} #{cert_name}\n"
       Chef::Log.info "line #{uri.host} #{cert_name} found in #{hosts}"
     else
-      etc_hosts.write("#{uri.host} #{cert_name}")
+      etc_hosts.write("#{uri.host} #{cert_name}\n")
     end
     etc_hosts.close
     repo_source = new_resource.source.gsub(uri.host.to_s, cert_name.to_s)
