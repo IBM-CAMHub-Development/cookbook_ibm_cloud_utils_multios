@@ -21,5 +21,6 @@ def def_aws_yumsetup
   execute 'enable-extra-repository' do
     command 'yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional'
     only_if { IBM::IBMHelper.awscloud? }
+    only_if { node['platform_family'] == "rhel" }
   end
 end
