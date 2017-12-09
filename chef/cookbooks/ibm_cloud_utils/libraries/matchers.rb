@@ -91,15 +91,15 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_zip, :zip, source)
   end
 
-  def check_ibm_cloud_utils_supported_os_check(source)
+  def ibm_cloud_utils_supported_os_check(source)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_supported_os_check, :check, source)
   end
 
-  def updateshosts_ibm_cloud_utils_hostsfile_update(source)
+  def ibm_cloud_utils_hostsfile_update(source)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_hostsfile_update, :updateshosts, source)
   end
 
-  def enable_ibm_cloud_utils_enable_awsyumrepo(source)
+  def ibm_cloud_utils_enable_awsyumrepo(source)
     ChefSpec::Matchers::ResourceMatcher.new(:ibm_cloud_utils_enable_awsyumrepo, :enable, source)
   end
 end
