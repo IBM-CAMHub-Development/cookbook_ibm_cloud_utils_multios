@@ -2,7 +2,7 @@
 # Cookbook Name:: ibm_cloud_utils
 # Provider:: webdav
 #
-# Copyright IBM Corp. 2017, 2017
+# Copyright IBM Corp. 2016, 2018
 #
 
 use_inline_resources

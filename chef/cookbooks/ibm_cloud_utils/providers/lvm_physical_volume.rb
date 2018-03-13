@@ -1,7 +1,7 @@
 ########################################################
-#	  Copyright IBM Corp. 2012, 2016 
+# Copyright IBM Corp. 2016, 2018
 ########################################################
-# 
+#
 
 use_inline_resources
 
@@ -24,7 +24,7 @@ action :create do
       Chef::Log.info("PV created using disk #{new_resource.disk}")
     else
       Chef::Application.fatal!(errormessage, 13)
-    end  
+    end
   end
   new_resource.updated_by_last_action(true)
 end

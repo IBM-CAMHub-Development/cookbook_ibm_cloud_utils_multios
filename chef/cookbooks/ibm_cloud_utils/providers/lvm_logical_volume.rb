@@ -1,7 +1,7 @@
 ########################################################
-#	  Copyright IBM Corp. 2012, 2016 
+# Copyright IBM Corp. 2016, 2018
 ########################################################
-# 
+#
 
 use_inline_resources
 include Chef::Mixin::ShellOut
@@ -23,10 +23,10 @@ action :create do
     end
 
     Chef::Log.info("Checking if the volume group #{new_resource.vg_name} has enough free space")
-    
+
     vg_size_free = shell_out!("vgs #{new_resource.vg_name} --noheadings --nosuffix --units b -o vg_free ")
     Chef::Log.info("free space: #{vg_size_free.stdout}")
-    
+
     lv_size_req = case new_resource.lv_size
                   when /^(\d+)(k|K)$/
                     (Regexp.last_match[1].to_i * 1024)
@@ -43,7 +43,7 @@ action :create do
                      Chef::Application.fatal!("Invalid size #{Regexp.last_match[1]} for lv_size", 2)
                   end
     Chef::Log.info("required space: #{lv_size_req}")
- 
+
     Chef::Log.info("Creating logical volume #{new_resource.lv_name}")
     errormessage3 ||= "Logical volume #{new_resource.lv_name} was not created"
     ruby_block "Create LV #{new_resource.lv_name}" do
@@ -77,7 +77,7 @@ action :create do
       mount_point new_resource.mountpoint
       options new_resource.options
       action [:mount, :enable]
-    end 
+    end
     Chef::Log.info("LV #{new_resource.lv_name} created")
   end
   new_resource.updated_by_last_action(true)

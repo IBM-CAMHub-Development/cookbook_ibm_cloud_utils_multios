@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ########################################################
-#	  Copyright IBM Corp. 2017, 2017
+#	  Copyright IBM Corp. 2017, 2018
 ########################################################
 #
 # Cookbook Name:: ibm_cloud_utils
@@ -19,6 +19,7 @@
 # <md>          :required => 'recommended',
 # <md>          :default => '',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'pattern',
 # <md>          :secret => 'false'
@@ -32,6 +33,7 @@ default['ibm']['sw_repo'] = ''
 # <md>          :required => 'recommended',
 # <md>          :default => 'repouser',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'pattern',
 # <md>          :secret => 'false'
@@ -45,6 +47,7 @@ default['ibm']['sw_repo_user'] = ''
 # <md>          :required => 'recommended',
 # <md>          :default => '',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'none',
 # <md>          :secret => 'true'
@@ -59,6 +62,7 @@ default['ibm']['sw_repo_password'] = ''
 # <md>          :required => 'recommended',
 # <md>          :default => '',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'pattern',
 # <md>          :secret => 'false'
@@ -72,6 +76,7 @@ default['ibm']['im_repo'] = ''
 # <md>          :required => 'recommended',
 # <md>          :default => 'repouser',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'pattern',
 # <md>          :secret => 'false'
@@ -97,6 +102,7 @@ default['ibm']['im_repo_password'] = ''
 # <md>          :required => 'recommended',
 # <md>          :default => 'false',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'none',
 # <md>          :secret => 'false'
@@ -110,6 +116,7 @@ default['ibm']['im_repo_self_signed_cert'] = "false"
 # <md>          :required => 'recommended',
 # <md>          :default => 'false',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'none',
 # <md>          :secret => 'false'
@@ -123,6 +130,7 @@ default['ibm']['sw_repo_self_signed_cert'] = "false"
 # <md>          :required => 'recommended',
 # <md>          :default => 'true',
 # <md>          :selectable => 'true',
+# <md>          :immutable_after_create => 'true',
 # <md>          :precedence_level => 'node',
 # <md>          :parm_type => 'none',
 # <md>          :secret => 'false'

@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ########################################################
-# Copyright IBM Corp. 2012, 2016
+# Copyright IBM Corp. 2016, 2018
 ########################################################
 #
 # Cookbook Name:: ibm_cloud_utils
@@ -54,7 +54,7 @@ def load_current_resource
   else
     @current_resource.exists = 'U'
   end
-  
+
   # Call yum to determine the available package(s) information. Yum will return a non-zero exit code if the installed package is current.
   a = shell_out!("yum -q list available #{@new_resource.package_name}|grep -v Available")
   if a.exitstatus != 0

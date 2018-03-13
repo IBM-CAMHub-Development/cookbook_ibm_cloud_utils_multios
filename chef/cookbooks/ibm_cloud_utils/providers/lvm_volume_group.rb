@@ -1,7 +1,7 @@
 ########################################################
-#	  Copyright IBM Corp. 2012, 2016 
+# Copyright IBM Corp. 2016, 2018
 ########################################################
-# 
+#
 
 use_inline_resources
 include Chef::Mixin::ShellOut

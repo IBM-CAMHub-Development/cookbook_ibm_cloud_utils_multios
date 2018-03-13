@@ -1,5 +1,5 @@
 ###########################################################
-#          Copyright IBM Corp. 2017, 2017
+# Copyright IBM Corp. 2016, 2018
 ###########################################################
 include Chef::Mixin::ShellOut
 
@@ -68,7 +68,7 @@ end
 action :enable do
   if node['os'] == 'linux'
     run_action(:create)
-    mount new_resource.mountpoint do  
+    mount new_resource.mountpoint do
       action [:mount, :enable]
       device new_resource.device
       fstype new_resource.fstype
@@ -81,8 +81,8 @@ end
 action :disable do
   if node['os'] == 'linux'
     run_action(:remove)
-    mount new_resource.mountpoint do        
-      action :disable  
+    mount new_resource.mountpoint do
+      action :disable
       device new_resource.device
       fstype new_resource.fstype
       options new_resource.options
