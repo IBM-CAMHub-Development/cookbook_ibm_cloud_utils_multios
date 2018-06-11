@@ -5,15 +5,11 @@
 require 'chef/mixin/shell_out'
 include Chef::Mixin::ShellOut
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
 # Defining new Chef Resource
 
 def load_current_resource
-  @current_resource = Chef::Resource::IbmCloudUtilsSelinux.new(@new_resource.name)
+  # Chef 12 @current_resource = Chef::Resource::IbmCloudUtilsSelinux.new(@new_resource.name)
+  @current_resource = Chef::Resource.resource_for_node(:ibm_cloud_utils_selinux, node).new(@new_resource.name)
   cmnd = shell_out('getenforce')
   @current_resource.status(cmnd.stdout.chomp.downcase)
 end
@@ -45,7 +41,6 @@ action :enforcing do
   else
     log 'This OS is not using SElinux'
   end
-  new_resource.updated_by_last_action(true)
 end
 # Defining action disabled
 action :disabled do
@@ -58,7 +53,6 @@ action :disabled do
       selinux_template('disabled')
     end
   end
-  new_resource.updated_by_last_action(true)
 end
 # Defining action permissive
 action :permissive do
@@ -71,10 +65,8 @@ action :permissive do
       selinux_template('permissive')
     end
   end
-  new_resource.updated_by_last_action(true)
 end
 # If action enabled is used it triggers action enforcing
 action :enabled do
   run_action(:enforcing)
-  new_resource.updated_by_last_action(true)
 end

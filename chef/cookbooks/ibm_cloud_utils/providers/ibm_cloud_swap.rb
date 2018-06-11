@@ -3,12 +3,6 @@
 ###########################################################
 include Chef::Mixin::ShellOut
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 def create_swapfile(file, size)
   Chef::Log.info("creating #{file}")
   ::File.open(file, 'w') do |f|
@@ -62,7 +56,6 @@ action :create do
         format_swapfile(new_resource.swapfile, new_resource.label)
         sync
         enable_swapfile(new_resource.swapfile)
-        new_resource.updated_by_last_action(true)
       else
         Chef::Log.info("#{new_resource.swapfile} is a block device but force is not set...")
         Chef::Application.fatal!("#{new_resource.swapfile} is a block device but force is not set...", 666)
@@ -89,7 +82,6 @@ action :enable do
       device new_resource.swapfile
       fstype 'swap'
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -101,6 +93,5 @@ action :disable do
       device new_resource.swapfile
       fstype 'swap'
     end
-    new_resource.updated_by_last_action(true)
   end
 end

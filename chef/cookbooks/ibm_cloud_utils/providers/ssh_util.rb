@@ -7,12 +7,6 @@
 ###############################################################################
 require 'net/ssh'
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 def ssh_exec!(ssh, command)
   stdout_data = ''
   stderr_data = ''
@@ -44,7 +38,7 @@ def check
       not_if = ssh_exec!(ssh, new_resource.not_if_check)[2]
       Chef::Log.debug("Not if constraint is #{not_if}")
     end
-    if only_if.zero? && not_if != 0
+    if only_if == 0 && not_if != 0
       Chef::Log.debug('Constraint conditions are met')
       return true
     else
@@ -68,7 +62,6 @@ action :copy do
     end
   end
   c.loop
-  new_resource.updated_by_last_action(true)
 end
 
 action :exec do
@@ -80,5 +73,4 @@ action :exec do
       Chef::Log.info('One of the constraints failed')
     end
   end
-  new_resource.updated_by_last_action(true)
 end

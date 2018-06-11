@@ -2,16 +2,10 @@
 # Cookbook Name:: ibm_cloud_utils
 # Provider:: enable_awsyumrepo
 #
-# Copyright IBM Corp. 2017, 2017
+# Copyright IBM Corp. 2017, 2018
 #
 
 include IBM::IBMHelper
-
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
 
 action :enable do
   def_aws_yumsetup

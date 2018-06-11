@@ -2,10 +2,13 @@ name             'ibm_cloud_utils'
 maintainer       'IBM Corp'
 maintainer_email ''
 license          'Copyright IBM Corp. 2016, 2018'
+issues_url       'https://github.com/IBM-CAMHub-Open/cookbook_ibm_cloud_utils_multios/issues'
+source_url       'https://github.com/IBM-CAMHub-Open/cookbook_ibm_cloud_utils_multios'
+chef_version     '>= 12.5' if respond_to?(:chef_version)
 description      'LWRPs repository'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 provides         'ibm_cloud_utils'
-supports         'linux'
+supports         'redhat'
 supports         'windows'
 description <<-EOH
 
@@ -1270,7 +1273,7 @@ end
 
 EOH
 
-version '1.0.2'
+version '2.0.0'
 
 attribute 'ibm/im_repo',
           :default => '',

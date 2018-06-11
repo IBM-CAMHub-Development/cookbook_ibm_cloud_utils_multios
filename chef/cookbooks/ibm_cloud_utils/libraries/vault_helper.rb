@@ -1,6 +1,6 @@
 # encoding: UTF-8
 ########################################################
-# Copyright IBM Corp. 2012, 2017
+# Copyright IBM Corp. 2016, 2018
 ########################################################
 #
 # Cookbook Name:: ibm_cloud_utils
@@ -12,7 +12,7 @@ module Vault
       if ChefVault::Item.vault?(bag, id)
         ChefVault::Item.load(bag, id)
       elsif node['chef-vault']['databag_fallback']
-        Chef::DataBagItem.load(bag, id)
+        data_bag_item(bag, id)
       else
         raise "Trying to load a regular data bag item #{id} from #{bag}, and databag_fallback is disabled"
       end

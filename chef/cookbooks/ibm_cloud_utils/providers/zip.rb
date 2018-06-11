@@ -8,8 +8,6 @@
 require 'chef/resource/powershell_script'
 # include Chef::Provider::PowershellScript
 
-use_inline_resources
-
 action :zip do
     if RUBY_PLATFORM =~ /win|mingw/
         Chef::Log.debug("DEBUG: Zipping on Windows #{new_resource.target_zip} to #{new_resource.source}...")
@@ -61,5 +59,4 @@ action :zip do
             command "zip -r #{new_resource.target_zip} #{new_resource.source}"
         end
     end
-    new_resource.updated_by_last_action(true)
 end

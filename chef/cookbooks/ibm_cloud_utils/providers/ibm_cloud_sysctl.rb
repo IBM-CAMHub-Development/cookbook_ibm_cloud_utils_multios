@@ -2,13 +2,6 @@
 # Copyright IBM Corp. 2016, 2018
 ###########################################################
 
-
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 def sysctl_template(file)
   Chef::Log.info("populating #{file}")
   ::File.open(file, 'a+') { |f| f.write("# This file is managed by Chef client. Manual modifications may be\n# overwritten the next time Chef client runs...\n") }

@@ -6,11 +6,6 @@
 # Cookbook Name:: ibm_cloud_utils
 ###############################################################################
 include Chef::Mixin::ShellOut
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
 
 action :install do
   if @current_resource.exists == 'I'
@@ -18,7 +13,6 @@ action :install do
       shell_out!("yum #{@new_resource.options} install #{@new_resource.package_name}.x86_64 #{@new_resource.package_name}.i686")
     end
   end
-  new_resource.updated_by_last_action(true)
 end
 
 action :upgrade do
@@ -27,7 +21,6 @@ action :upgrade do
       shell_out!("yum #{expand_options(@new_resource.options)} update #{@new_resource.package_name}.x86_64 #{@new_resource.package_name}.i686")
     end
   end
-  new_resource.updated_by_last_action(true)
 end
 
 action :purge do
@@ -36,11 +29,11 @@ action :purge do
       shell_out!("yum #{expand_options(@new_resource.options)} erase #{@new_resource.package_name}.x86_64 #{@new_resource.package_name}.i686")
     end
   end
-  new_resource.updated_by_last_action(true)
 end
 
 def load_current_resource
-  @current_resource = Chef::Resource::IbmCloudUtilsIbmCloudYum.new(@new_resource.name)
+  # CHEF 12 @current_resource = Chef::Resource::IbmCloudUtilsIbmCloudYum.new(@new_resource.name)
+  @current_resource = Chef::Resource.resource_for_node(:ibm_cloud_utils_ibm_cloud_yum, node).new(@new_resource.name)
   @current_resource.package_name(@new_resource.package_name)
   @current_resource.version(@new_resource.version)
   @current_resource.source(@new_resource.source)

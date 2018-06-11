@@ -8,13 +8,6 @@
 require 'net/ssh'
 require 'net/scp'
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
-
 action :pull do
 
   Net::SSH.start(new_resource.remote_host, new_resource.login, :password => new_resource.password) do |session|
@@ -46,7 +39,7 @@ action :pull do
   Chef::Log.info " Local file: #{@dest} #{@status}"
 
   if local_sum == @remote_sum
-    new_resource.updated_by_last_action(false)
+    Chef::Log.info "Remote and Local file match, no action: #{new_resource.source} "
   else
     if !new_resource.priv_ssh_key.nil?
       opts = { keys: [ new_resource.priv_ssh_key ], keys_only: true }
@@ -62,7 +55,6 @@ action :pull do
       end
       Chef::Log.info "Done"
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -97,7 +89,7 @@ action :push do
   Chef::Log.info "Remote file: #{@dest} #{@status}"
 
   if local_sum == @remote_sum
-    new_resource.updated_by_last_action(false)
+    Chef::Log.info "Remote and Local file match, no action: #{new_resource.source} "
   else
     if !new_resource.priv_ssh_key.nil?
       opts = { keys: [ new_resource.priv_ssh_key ], keys_only: true }
@@ -113,6 +105,5 @@ action :push do
       end
       Chef::Log.info "Done"
     end
-    new_resource.updated_by_last_action(true)
   end
 end

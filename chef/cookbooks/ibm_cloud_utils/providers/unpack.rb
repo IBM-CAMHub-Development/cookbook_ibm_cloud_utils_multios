@@ -8,12 +8,6 @@
 require 'chef/resource/powershell_script'
 # include Chef::Provider::PowershellScript
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :unpack do
   parse_extension
   basename = @basename
@@ -162,8 +156,6 @@ action :unpack do
     backup false
     only_if { new_resource.remove_local }
   end
-
-  new_resource.updated_by_last_action(true)
 end
 
 action :download do
@@ -240,8 +232,6 @@ action :download do
     end
     headers("Authorization"=>"Basic #{Base64.encode64("#{new_resource.sw_repo_user}:#{sw_repo_password}").gsub('\n', '')}") if new_resource.secure_repo == "true" # ~password_checker
   end
-
-  new_resource.updated_by_last_action(true)
 end
 
 private

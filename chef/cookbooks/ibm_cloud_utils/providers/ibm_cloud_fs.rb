@@ -3,12 +3,6 @@
 ###########################################################
 include Chef::Mixin::ShellOut
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 def format_device(device, label, fstype)
   case fstype
   when ['ext2', 'ext3', 'ext4']
@@ -54,7 +48,6 @@ action :create do
     end
     Chef::Log.info("#{new_resource.device} is already formatted, mounting...")
     mount_device(new_resource.device, new_resource.mountpoint, new_resource.fstype, new_resource.options)
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -74,7 +67,6 @@ action :enable do
       fstype new_resource.fstype
       options new_resource.options
     end
-    new_resource.updated_by_last_action(true)
   end
 end
 
@@ -87,6 +79,5 @@ action :disable do
       fstype new_resource.fstype
       options new_resource.options
     end
-    new_resource.updated_by_last_action(true)
   end
 end

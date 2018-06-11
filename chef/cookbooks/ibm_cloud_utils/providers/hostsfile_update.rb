@@ -7,12 +7,6 @@
 
 include IBM::IBMHelper
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :updateshosts do
   #stack_id = new_resource.stack_id
   stack_id = node['ibm_internal']['stack_id']
@@ -30,5 +24,4 @@ action :updateshosts do
       Chef::Log.info("Updated the hosts file")
     end
   end
-  new_resource.updated_by_last_action(true)
 end

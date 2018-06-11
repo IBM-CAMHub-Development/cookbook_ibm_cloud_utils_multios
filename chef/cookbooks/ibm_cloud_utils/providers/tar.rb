@@ -7,8 +7,6 @@
 ###############################################################################
 require 'chef/resource/powershell_script'
 
-use_inline_resources
-
 action :tar do
     if RUBY_PLATFORM =~ /win|mingw/
         Chef::Log.debug("DEBUG: tar on Windows #{new_resource.target_tar} to #{new_resource.source}...")
@@ -38,5 +36,4 @@ action :tar do
             command "tar -cf #{new_resource.target_tar} #{new_resource.source}"
         end
     end
-    new_resource.updated_by_last_action(true)
 end

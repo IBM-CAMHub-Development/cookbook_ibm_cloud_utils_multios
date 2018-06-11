@@ -3,12 +3,6 @@
 ########################################################
 #
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :create do
   # This works on linux only
   if RUBY_PLATFORM.downcase.include?'linux'
@@ -26,5 +20,4 @@ action :create do
       Chef::Application.fatal!(errormessage, 13)
     end
   end
-  new_resource.updated_by_last_action(true)
 end

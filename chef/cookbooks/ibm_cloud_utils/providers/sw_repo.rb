@@ -5,12 +5,6 @@
 # Copyright IBM Corp. 2016, 2018
 #
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :check_package do
   require 'net/http'
   require 'openssl'
@@ -37,7 +31,6 @@ action :check_package do
   elsif res.code == "404"
     raise "\n ERROR: Package #{new_resource.package} not found in #{new_resource.repository}/#{new_resource.sw_repo_path} \n"
   end
-  new_resource.updated_by_last_action(true)
 end
 
 def define_repo_password

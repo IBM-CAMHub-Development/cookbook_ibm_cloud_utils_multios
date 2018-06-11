@@ -2,13 +2,7 @@
 # Copyright IBM Corp. 2016, 2018
 ########################################################
 #
-
-use_inline_resources
 include Chef::Mixin::ShellOut
-
-def whyrun_supported?
-  true
-end
 
 action :create do
   # This works on linux only
@@ -28,5 +22,4 @@ action :create do
       Chef::Log.info("VG #{new_resource.vg_name} created")
     end
   end
-  new_resource.updated_by_last_action(true)
 end

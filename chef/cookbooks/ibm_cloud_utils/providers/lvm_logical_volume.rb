@@ -3,12 +3,7 @@
 ########################################################
 #
 
-use_inline_resources
 include Chef::Mixin::ShellOut
-
-def whyrun_supported?
-  true
-end
 
 action :create do
   # This works on linux only
@@ -80,5 +75,4 @@ action :create do
     end
     Chef::Log.info("LV #{new_resource.lv_name} created")
   end
-  new_resource.updated_by_last_action(true)
 end

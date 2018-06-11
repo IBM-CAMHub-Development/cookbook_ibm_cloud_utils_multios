@@ -5,12 +5,6 @@
 # Copyright IBM Corp. 2016, 2018
 #
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :download do
   require 'net/http'
   require 'openssl'
@@ -43,7 +37,6 @@ action :download do
   when "404"
     raise "\n ERROR: File not found: #{new_resource.file} \n"
   end
-  new_resource.updated_by_last_action(true)
 end
 
 action :upload do
@@ -62,7 +55,6 @@ action :upload do
   upload.basic_auth(repo_user, repo_password) if new_resource.secure_repo == "true"
   http.request(upload, ::File.read(new_resource.source_path + '/' + new_resource.file))
   Chef::Log.info "Uploaded file: #{new_resource.file} to #{new_resource.webdav_server}/#{new_resource.collection}/ "
-  new_resource.updated_by_last_action(true)
 end
 
 action :delete do
@@ -80,7 +72,6 @@ action :delete do
   delete_file.basic_auth(repo_user, repo_password) if new_resource.secure_repo == "true"
   http.request(delete_file)
   Chef::Log.info "Deleted file: #{new_resource.file} from #{new_resource.webdav_server}/#{new_resource.collection}/ "
-  new_resource.updated_by_last_action(true)
 end
 
 action :create_collection do
@@ -98,7 +89,6 @@ action :create_collection do
   new_collection.basic_auth(repo_user, repo_password) if new_resource.secure_repo == "true"
   http.request(new_collection)
   Chef::Log.info "Collection #{new_resource.collection} created in #{new_resource.webdav_server}/ "
-  new_resource.updated_by_last_action(true)
 end
 
 action :delete_collection do
@@ -116,7 +106,6 @@ action :delete_collection do
   old_collection.basic_auth(repo_user, repo_password) if new_resource.secure_repo == "true"
   http.request(old_collection)
   Chef::Log.info "Collection #{new_resource.collection} deleted from #{new_resource.webdav_server}/ "
-  new_resource.updated_by_last_action(true)
 end
 
 def define_repo_password

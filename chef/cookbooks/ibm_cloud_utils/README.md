@@ -1268,7 +1268,7 @@ Requirements
 
 ### Platform:
 
-* Linux
+* Redhat
 * Windows
 
 ### Cookbooks:

@@ -5,12 +5,6 @@
 # Copyright IBM Corp. 2016, 2018
 #
 
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
-
 action :check_package do
   require 'net/http'
   require 'openssl'
@@ -118,7 +112,6 @@ action :check_package do
     end
     raise "\n ERROR: Package #{new_resource.offering_id} not found in #{new_resource.repository} \n" if found == "false"
   end
-  new_resource.updated_by_last_action(true)
 end
 
 def define_im_repo_password
